@@ -4,7 +4,17 @@ from tqdm import trange
 from algorithms.common import MedianFilter
 
 
-def get_median(kernel_hist, filter_size):
+def get_median(kernel_hist: np.array, filter_size: int) -> int:
+    """
+    Find median of current window using kernel histogram
+
+    Args:
+        kernel_hist: histogram of values in current window
+        filter_size: size of the filter (filter_size = 2 * radius + 1)
+    Returns:
+        median of current window
+    """
+
     median = 0
     less_than_median = 0
 
