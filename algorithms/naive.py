@@ -31,7 +31,7 @@ class NaiveMedianFilter(MedianFilter):
         blurred_image = np.zeros_like(image)
 
         # Iterate over all pixels and find median in each filter window
-        for i in trange(height):
+        for i in trange(height, desc="Rows"):
             for j in range(width):
                 image_slice = padded_image[i:i+filter_size, j:j+filter_size, :].transpose((2, 0, 1))
 

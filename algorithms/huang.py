@@ -33,7 +33,7 @@ class HuangMedianFilter(MedianFilter):
         # Threshold for median identification
         threshold = (filter_size ** 2) // 2
 
-        for i in trange(height):
+        for i in trange(height, desc="Rows"):
             for channel in range(channels):
                 # Build new histogram for each row
                 hist = np.zeros(256)
