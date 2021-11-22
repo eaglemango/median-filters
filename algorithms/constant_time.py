@@ -92,7 +92,7 @@ class ConstantTimeMedianFilter(MedianFilter):
                     blurred_image[i, j, channel] = median
 
                     # Update column histograms ================================
-                    if i + 1 != width and j + 1 != width:
+                    if i + 1 != height and j + 1 != width:
                         # Remove old value
                         value = padded_image[i, j + filter_size, channel]
                         updated_column_hists[j + filter_size, value] -= 1
