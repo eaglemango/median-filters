@@ -43,3 +43,41 @@ class NaiveMedianFilter(MedianFilter):
                 blurred_image[i][j] = medians
 
         return blurred_image
+
+    def apply_slow(self, image: np.array, radius: int) -> np.array:
+        """
+        Apply "naive" median filter of chosen radius to the image
+        "Naive" means using sorting for finding the median value
+
+        Args:
+            image: image represented as numpy array
+            radius: filter radius
+        Returns:
+            image after filter application
+        """
+
+        # Array dimensions
+        height, width, channels = image.shape
+        filter_size = 2 * radius + 1
+
+        # We need to pad image before using filter
+        padded_image = self.pad_image(image, radius)
+
+        # Blurred image (filled below)
+        blurred_image = np.zeros_like(image)
+
+        # Iterate over all pixels and find median in each filter window
+        for i in trange(height, desc="Rows"):
+            for channel in range(channels):
+                for j in range(width):
+                    candidates = []
+                    for i_ in range(i, i + filter_size):
+                        for j_ in range(j, j + filter_size):
+                            candidates.append(padded_image[i_, j_, channel])
+
+                    median_pos = (filter_size ** 2) // 2
+                    median = sorted(candidates)[median_pos]
+
+                    blurred_image[i, j, channel] = median
+
+        return blurred_image
