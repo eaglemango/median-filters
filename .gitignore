@@ -130,3 +130,6 @@ dmypy.json
 
 # Local IDE files
 .idea
+
+# Local OS files
+.DS_store
